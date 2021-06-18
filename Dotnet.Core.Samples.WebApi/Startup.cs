@@ -1,5 +1,5 @@
-using dotnet.core.samples.webapi.Models;
-using dotnet.core.samples.webapi.Services;
+using Dotnet.Core.Samples.WebApi.Models;
+using Dotnet.Core.Samples.WebApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
-namespace dotnet.core.samples.webapi
+namespace Dotnet.Core.Samples.WebApi
 {
     public class Startup
     {

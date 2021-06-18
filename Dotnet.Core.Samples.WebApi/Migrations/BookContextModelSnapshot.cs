@@ -3,7 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using dotnet.core.samples.webapi.Models;
+using Dotnet.Core.Samples.WebApi.Models;
 
 namespace Dotnet.Core.Samples.Webapi.Migrations
 {

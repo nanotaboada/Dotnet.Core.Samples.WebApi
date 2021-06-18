@@ -1,9 +1,9 @@
-﻿using dotnet.core.samples.webapi.Models;
-using dotnet.core.samples.webapi.Services;
+﻿using Dotnet.Core.Samples.WebApi.Models;
+using Dotnet.Core.Samples.WebApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace dotnet.core.samples.webapi.Controllers
+namespace Dotnet.Core.Samples.WebApi.Controllers
 {
     /// <summary>
     /// 

@@ -1,6 +1,6 @@
 using System;
 
-namespace dotnet.core.samples.webapi.Models
+namespace Dotnet.Core.Samples.WebApi.Models
 {
     public static class BookFake
     {

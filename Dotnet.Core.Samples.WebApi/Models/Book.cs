@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace dotnet.core.samples.webapi.Models
+namespace Dotnet.Core.Samples.WebApi.Models
 {
     public class Book
     {

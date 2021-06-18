@@ -1,8 +1,7 @@
-﻿using System;
-using dotnet.core.samples.webapi.Models;
+﻿using Dotnet.Core.Samples.WebApi.Models;
 using Microsoft.Extensions.Logging;
 
-namespace dotnet.core.samples.webapi.Services
+namespace Dotnet.Core.Samples.WebApi.Services
 {
     public class BookService : IBookService
     {

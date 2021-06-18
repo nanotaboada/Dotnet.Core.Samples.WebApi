@@ -1,13 +1,13 @@
-﻿using dotnet.core.samples.webapi.Controllers;
-using dotnet.core.samples.webapi.Models;
-using dotnet.core.samples.webapi.Services;
+﻿using Dotnet.Core.Samples.WebApi.Controllers;
+using Dotnet.Core.Samples.WebApi.Models;
+using Dotnet.Core.Samples.WebApi.Services;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
 
-namespace dotnet.core.samples.webapi.tests
+namespace Dotnet.Core.Samples.WebApi.Tests
 {
     public class BookControllerTests
     {

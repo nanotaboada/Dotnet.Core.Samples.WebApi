@@ -1,6 +1,6 @@
-﻿using dotnet.core.samples.webapi.Models;
+﻿using Dotnet.Core.Samples.WebApi.Models;
 
-namespace dotnet.core.samples.webapi.Services
+namespace Dotnet.Core.Samples.WebApi.Services
 {
     public interface IBookService
     {

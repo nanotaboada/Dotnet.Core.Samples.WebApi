@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace dotnet.core.samples.webapi
+namespace Dotnet.Core.Samples.WebApi
 {
     public class Program
     {

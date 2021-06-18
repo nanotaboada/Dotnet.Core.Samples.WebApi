@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace dotnet.core.samples.webapi.Models
+namespace Dotnet.Core.Samples.WebApi.Models
 {
     public class BookContext : DbContext
     {
