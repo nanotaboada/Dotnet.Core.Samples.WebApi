@@ -24,7 +24,7 @@ namespace dotnet.core.samples.webapi
             services.AddControllers();
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Dotnet.Core.Samples.Webapi", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Dotnet.Core.Samples.WebApi", Version = "v1" });
             });
 
             services.AddDbContext<BookContext>(configure =>
@@ -41,7 +41,7 @@ namespace dotnet.core.samples.webapi
                 application.UseDeveloperExceptionPage();
                 application.UseSwagger();
                 application.UseSwaggerUI(options => 
-                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Dotnet.Core.Samples.Webapi v1")
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Dotnet.Core.Samples.WebApi v1")
                 );
             }
 

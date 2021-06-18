@@ -11,6 +11,7 @@ namespace dotnet.core.samples.webapi.tests
 {
     public class BookControllerTests
     {
+        #region HTTP GET
         [Fact]
         public void GivenHttpGetVerb_WhenRequestParameterDoesNotIdentifyAnExistingBook_ThenShouldReturnStatusNotFound()
         {
@@ -47,5 +48,8 @@ namespace dotnet.core.samples.webapi.tests
             result.StatusCode.Should().Equals(200);
             result.Value.Should().BeEquivalentTo(book);
         }
+        #endregion
+
+
     }
 }

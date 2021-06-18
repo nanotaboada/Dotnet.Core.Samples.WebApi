@@ -5,15 +5,15 @@ namespace dotnet.core.samples.webapi.Services
     public interface IBookService
     {
         // Create
-        int Create(Book book);
+        bool Create(Book book);
 
         // Retrieve
         Book RetrieveByIsbn(string isbn);
 
         // Update
-        void Update(Book book);
+        bool Update(Book book);
 
         // Delete
-        void Delete(string isbn);
+        bool Delete(string isbn);
     }
 }

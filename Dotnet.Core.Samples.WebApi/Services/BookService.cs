@@ -11,14 +11,17 @@ namespace dotnet.core.samples.webapi.Services
 
         public BookService(ILogger<BookService> logger, BookContext bookContext)
         {
-            this._logger = logger;
-            this._bookContext = bookContext;
+            _logger = logger;
+            _bookContext = bookContext;
         }
 
         // Create
-        public int Create(Book book)
+        public bool Create(Book book)
         {
-            throw new NotImplementedException();
+            _bookContext.Add(book);
+            int result = _bookContext.SaveChanges();
+
+            return result == 1;
         }
 
         // Retrieve
@@ -28,15 +31,32 @@ namespace dotnet.core.samples.webapi.Services
         }
 
         // Update
-        public void Update(Book book)
+        public bool Update(Book book)
         {
-            throw new NotImplementedException();
+            int result = 0;
+
+            if (_bookContext.Books.Find(book.Isbn) != null)
+            {
+                _bookContext.Update(book);
+                result = _bookContext.SaveChanges();
+            }
+
+            return result == 1;
         }
 
         // Delete
-        public void Delete(string isbn)
+        public bool Delete(string isbn)
         {
-            throw new NotImplementedException();
+            int result = 0;
+            var existing = _bookContext.Books.Find(isbn);
+
+            if (existing != null)
+            {
+                _bookContext.Books.Remove(existing);
+                result = _bookContext.SaveChanges();
+            }
+
+            return result == 1;
         }
     }
 }
