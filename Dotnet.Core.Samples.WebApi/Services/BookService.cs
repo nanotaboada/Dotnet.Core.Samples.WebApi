@@ -1,4 +1,5 @@
 ﻿using Dotnet.Core.Samples.WebApi.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Dotnet.Core.Samples.WebApi.Services
@@ -17,8 +18,19 @@ namespace Dotnet.Core.Samples.WebApi.Services
         // Create
         public bool Create(Book book)
         {
-            _bookContext.Add(book);
-            int result = _bookContext.SaveChanges();
+            int result;
+
+            // TODO: Implement validation method (e.g. IsValidBook, IsValidIsbn)
+            try
+            {
+                _bookContext.Add(book);
+                result = _bookContext.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                return false;
+            }
+
 
             return result == 1;
         }
