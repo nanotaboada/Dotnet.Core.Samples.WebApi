@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\dotnet.core.samples.webapi\dotnet.core.samples.webapi.csproj" />
+    <ProjectReference Include="..\Dotnet.Core.Samples.WebApi\Dotnet.Core.Samples.WebApi.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Moq" />
