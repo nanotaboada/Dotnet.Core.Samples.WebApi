@@ -19,6 +19,7 @@
     </PackageReference>
     <PackageReference Include="Moq" Version="4.16.1" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="Bogus" Version="33.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,5 +28,6 @@
   <ItemGroup>
     <None Remove="Moq" />
     <None Remove="FluentAssertions" />
+    <None Remove="Bogus" />
   </ItemGroup>
 </Project>

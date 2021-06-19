@@ -35,10 +35,10 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 
         [Fact]
         [Trait("Category", "HTTP GET")]
-        public void GivenHttpGetVerb_WhenRequestParameterIdentifiesAnExistingBook_ThenShouldReturnStatusOkAndTheBook()
+        public void GivenHttpGetVerb_WhenRequestParameterIdentifiesExistingBook_ThenShouldReturnStatusOkAndTheBook()
         {
             // Arrange
-            var book = BookFake.CreateOne();
+            var book = BookFake.CreateOneWithRequiredFields();
             var logger = new Mock<ILogger<BookController>>();
 
             var service = new Mock<IBookService>();
@@ -60,10 +60,10 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 
         [Fact]
         [Trait("Category", "HTTP POST")]
-        public void GivenHttpPostVerb_WhenRequestBodyContainsValidButExistingBook_ThenShouldReturnStatusConflict()
+        public void GivenHttpPostVerb_WhenRequestBodyContainsExistingBook_ThenShouldReturnStatusConflict()
         {
             // Arrange
-            var book = BookFake.CreateOne();
+            var book = BookFake.CreateOneWithRequiredFields();
             var logger = new Mock<ILogger<BookController>>();
 
             var service = new Mock<IBookService>();
@@ -82,10 +82,10 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 
         [Fact]
         [Trait("Category", "HTTP POST")]
-        public void GivenHttpPostVerb_WhenRequestBodyContainsValidNewBook_ThenShouldReturnStatusCreatedAndLocationHeader()
+        public void GivenHttpPostVerb_WhenRequestBodyContainsNewBook_ThenShouldReturnStatusCreatedAndLocationHeader()
         {
             // Arrange
-            var book = BookFake.CreateOne();
+            var book = BookFake.CreateOneWithRequiredFields();
             var location = string.Format("/book/{0}", book.Isbn);
             var logger = new Mock<ILogger<BookController>>();
 
@@ -111,8 +111,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
         public void GivenHttpPostVerb_WhenRequestBodyContainsInvalidBook_ThenShouldReturnStatusBadRequest()
         {
             // Arrange
-            // The Book is invalid, as Title, Author, Published, Description and Website are required.
-            var book = new Book { Isbn = "978-1484200773" };
+            var book = BookFake.CreateOneWithoutRequiredFields();
             var location = string.Format("/book/{0}", book.Isbn);
             var logger = new Mock<ILogger<BookController>>();
 
@@ -133,6 +132,96 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 
         #endregion
 
-        // TODO: Add coverage for PUT and DELETE
+        #region HTTP PUT
+
+        [Fact]
+        [Trait("Category", "HTTP PUT")]
+        public void GivenHttpPutVerb_WhenRequestBodyContainsExistingBook_ThenShouldReturnStatusNoContent()
+        {
+            // Arrange
+            var book = BookFake.CreateOneWithRequiredFields();
+            var logger = new Mock<ILogger<BookController>>();
+
+            var service = new Mock<IBookService>();
+            service.Setup(s => s.Update(book)).Returns(true);
+
+            var controller = new BookController(logger.Object, service.Object);
+
+            // Act
+            var result = controller.Put(book) as NoContentResult;
+
+            // Assert
+            service.Verify(s => s.Update(It.IsAny<Book>()), Times.Exactly(1));
+            result.StatusCode.Should().Equals(204);
+        }
+
+        [Fact]
+        [Trait("Category", "HTTP PUT")]
+        public void GivenHttpPutVerb_WhenRequestBodyContainsNewBook_ThenShouldReturnNotFound()
+        {
+            // Arrange
+            var book = BookFake.CreateOneWithRequiredFields();
+            var logger = new Mock<ILogger<BookController>>();
+
+            var service = new Mock<IBookService>();
+            service.Setup(s => s.Update(book)).Returns(false);
+
+            var controller = new BookController(logger.Object, service.Object);
+
+            // Act
+            var result = controller.Put(book) as NotFoundResult;
+
+            // Assert
+            service.Verify(s => s.Update(It.IsAny<Book>()), Times.Exactly(1));
+            result.StatusCode.Should().Equals(404);
+        }
+
+        #endregion
+
+        #region HTTP DELETE
+
+        [Fact]
+        [Trait("Category", "HTTP DELETE")]
+        public void GivenHttpDeleteVerb_WhenRequestParameterIdentifiesExistingBook_ThenShouldReturnStatusNoContent()
+        {
+            // Arrange
+            var book = BookFake.CreateOneWithRequiredFields();
+            var logger = new Mock<ILogger<BookController>>();
+
+            var service = new Mock<IBookService>();
+            service.Setup(s => s.Delete(book.Isbn)).Returns(true);
+
+            var controller = new BookController(logger.Object, service.Object);
+
+            // Act
+            var result = controller.Delete(book.Isbn) as NoContentResult;
+
+            // Assert
+            service.Verify(s => s.Delete(It.IsAny<string>()), Times.Exactly(1));
+            result.StatusCode.Should().Equals(204);
+        }
+
+        [Fact]
+        [Trait("Category", "HTTP DELETE")]
+        public void GivenHttpDeleteVerb_WhenRequestParameterDoesNotIdentifyExistingBook_ThenShouldReturnNotFound()
+        {
+            // Arrange
+            var book = BookFake.CreateOneWithRequiredFields();
+            var logger = new Mock<ILogger<BookController>>();
+
+            var service = new Mock<IBookService>();
+            service.Setup(s => s.Delete(book.Isbn)).Returns(false);
+
+            var controller = new BookController(logger.Object, service.Object);
+
+            // Act
+            var result = controller.Delete(book.Isbn) as NotFoundResult;
+
+            // Assert
+            service.Verify(s => s.Delete(It.IsAny<string>()), Times.Exactly(1));
+            result.StatusCode.Should().Equals(404);
+        }
+
+        #endregion
     }
 }

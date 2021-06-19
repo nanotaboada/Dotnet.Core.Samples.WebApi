@@ -1,25 +1,43 @@
 using System;
+using Bogus;
 
 namespace Dotnet.Core.Samples.WebApi.Models
 {
     public static class BookFake
     {
-        public static Book CreateOne()
+        private static Random random = new Random();
+
+        public static Book CreateOneWithRequiredFields()
         {
-            return new Book
-            {
-                Isbn = "978-1484200773",
-                Title = "Pro Git",
-                SubTitle = "Everything you neeed to know about Git",
-                Author = "Scott Chacon and Ben Straub",
-                Published = new DateTime(2014, 11, 18, 0, 0, 0, DateTimeKind.Utc),
-                Publisher = "Apress; 2nd edition",
-                Pages = 458,
-                Description = "Pro Git (Second Edition) is your fully-updated guide to Git and its usage in the modern world. " +
-                    "Git has come a long way since it was first developed by Linus Torvalds for Linux kernel development. " +
-                    "It has taken the open source world by storm since its inception in 2005, and this book teaches you how to use it like a pro.",
-                Website = "https://git-scm.com/book/en/v2"
-            };
+            // Required fields are: Isbn, Title, Author, Published, Description and Website.
+            return new Faker<Book>()
+                .RuleFor(book => book.Isbn, fake => CreateFakeIsbn())
+                .RuleFor(book => book.Title, fake => fake.Lorem.Sentence(3))
+                .RuleFor(book => book.Author, fake => fake.Name.FullName())
+                .RuleFor(book => book.Published, fake => fake.Date.Past(6, DateTime.Now))
+                .RuleFor(book => book.Description, fake => fake.Lorem.Paragraph())
+                .RuleFor(book => book.Website, fake => fake.Internet.Url())
+                .Generate();
+        }
+
+        public static Book CreateOneWithoutRequiredFields()
+        {
+            return new Faker<Book>()
+                .RuleFor(book => book.Isbn, fake => CreateFakeIsbn())
+                .RuleFor(book => book.Title, fake => fake.Lorem.Words(3).ToString())
+                .RuleFor(book => book.Author, fake => fake.Name.FullName())
+                .Generate();
+        }
+
+        private static string CreateFakeIsbn()
+        {
+            var ean = "978";
+            var group = random.Next(0, 2).ToString("0");
+            var publisher = random.Next(200, 699).ToString("000");
+            var title = random.Next(0, 99999).ToString("00000");
+            var check = random.Next(0, 10).ToString("0");
+
+            return string.Format("{0}-{1}-{2}-{3}-{4}", ean, group, publisher, title, check);
         }
     }
 }
