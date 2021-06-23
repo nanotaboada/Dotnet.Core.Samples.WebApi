@@ -2,6 +2,7 @@
 
 ## Status
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bc69171666a84345b219bbb72a2e91a9)](https://app.codacy.com/gh/nanotaboada/Dotnet.Core.Samples.WebApi?utm_source=github.com&utm_medium=referral&utm_content=nanotaboada/Dotnet.Core.Samples.WebApi&utm_campaign=Badge_Grade_Settings)
 [![Build Status](https://dev.azure.com/nanotaboada/Dotnet.Core.Samples.WebApi/_apis/build/status/Dotnet.Core.Samples.WebApi?branchName=master)](https://dev.azure.com/nanotaboada/Dotnet.Core.Samples.WebApi/_build/latest?definitionId=10&branchName=master)
 
 ## Manifesto
