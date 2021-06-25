@@ -20,15 +20,12 @@ namespace Dotnet.Core.Samples.WebApi.Services
         {
             int result;
 
-            try
-            {
-                _bookContext.Add(book);
-                result = _bookContext.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                return false;
-            }
+            _bookContext.Add(book);
+
+            // In EF Core we dropped doing validation since it is usually already
+            // done client-side, server-side, and then in the database too.
+            // https://github.com/dotnet/efcore/issues/5224
+            result = _bookContext.SaveChanges();
 
             return result == 1;
         }
