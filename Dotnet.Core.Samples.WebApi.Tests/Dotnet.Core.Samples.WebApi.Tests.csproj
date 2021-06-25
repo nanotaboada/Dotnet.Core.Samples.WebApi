@@ -20,6 +20,7 @@
     <PackageReference Include="Moq" Version="4.16.1" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="Bogus" Version="33.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.7" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,5 +30,6 @@
     <None Remove="Moq" />
     <None Remove="FluentAssertions" />
     <None Remove="Bogus" />
+    <None Remove="Microsoft.EntityFrameworkCore.InMemory" />
   </ItemGroup>
 </Project>

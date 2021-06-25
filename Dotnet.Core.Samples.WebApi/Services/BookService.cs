@@ -20,7 +20,6 @@ namespace Dotnet.Core.Samples.WebApi.Services
         {
             int result;
 
-            // TODO: Implement validation method (e.g. IsValidBook, IsValidIsbn)
             try
             {
                 _bookContext.Add(book);
@@ -30,7 +29,6 @@ namespace Dotnet.Core.Samples.WebApi.Services
             {
                 return false;
             }
-
 
             return result == 1;
         }
