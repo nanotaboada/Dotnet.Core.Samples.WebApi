@@ -30,7 +30,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 
             // Assert
             service.Verify(s => s.RetrieveByIsbn(isbn), Times.Exactly(1));
-            result.StatusCode.Should().Equals(404);
+            result.StatusCode.Should().Be(404);
         }
 
         [Fact]
@@ -38,7 +38,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
         public void GivenHttpGetVerb_WhenRequestParameterIdentifiesExistingBook_ThenShouldReturnStatusOkAndTheBook()
         {
             // Arrange
-            var book = BookFake.CreateOneWithRequiredFields();
+            var book = BookFake.CreateOneValid();
             var logger = new Mock<ILogger<BookController>>();
 
             var service = new Mock<IBookService>();
@@ -51,7 +51,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 
             // Assert
             service.Verify(s => s.RetrieveByIsbn(It.IsAny<string>()), Times.Exactly(1));
-            result.StatusCode.Should().Equals(200);
+            result.StatusCode.Should().Be(200);
             result.Value.Should().BeEquivalentTo(book);
         }
         #endregion
@@ -63,7 +63,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
         public void GivenHttpPostVerb_WhenRequestBodyContainsExistingBook_ThenShouldReturnStatusConflict()
         {
             // Arrange
-            var book = BookFake.CreateOneWithRequiredFields();
+            var book = BookFake.CreateOneValid();
             var logger = new Mock<ILogger<BookController>>();
 
             var service = new Mock<IBookService>();
@@ -77,7 +77,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 
             // Assert
             service.Verify(s => s.Create(It.IsAny<Book>()), Times.Never);
-            result.StatusCode.Should().Equals(409);
+            result.StatusCode.Should().Be(409);
         }
 
         [Fact]
@@ -85,7 +85,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
         public void GivenHttpPostVerb_WhenRequestBodyContainsNewBook_ThenShouldReturnStatusCreatedAndLocationHeader()
         {
             // Arrange
-            var book = BookFake.CreateOneWithRequiredFields();
+            var book = BookFake.CreateOneValid();
             var location = string.Format("/book/{0}", book.Isbn);
             var logger = new Mock<ILogger<BookController>>();
 
@@ -101,7 +101,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
             // Assert
             service.Verify(s => s.RetrieveByIsbn(It.IsAny<string>()), Times.Exactly(1));
             service.Verify(s => s.Create(It.IsAny<Book>()), Times.Exactly(1));
-            result.StatusCode.Should().Equals(201);
+            result.StatusCode.Should().Be(201);
             result.Location.Should().BeEquivalentTo(location);
             result.Value.Should().BeEquivalentTo(book);
         }
@@ -111,7 +111,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
         public void GivenHttpPostVerb_WhenRequestBodyContainsInvalidBook_ThenShouldReturnStatusBadRequest()
         {
             // Arrange
-            var book = BookFake.CreateOneWithoutRequiredFields();
+            var book = BookFake.CreateOneInvalid();
             var logger = new Mock<ILogger<BookController>>();
 
             var service = new Mock<IBookService>();
@@ -126,7 +126,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
             // Assert
             service.Verify(s => s.RetrieveByIsbn(It.IsAny<string>()), Times.Exactly(1));
             service.Verify(s => s.Create(It.IsAny<Book>()), Times.Exactly(1));
-            result.StatusCode.Should().Equals(400);
+            result.StatusCode.Should().Be(400);
         }
 
         #endregion
@@ -138,7 +138,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
         public void GivenHttpPutVerb_WhenRequestBodyContainsExistingBook_ThenShouldReturnStatusNoContent()
         {
             // Arrange
-            var book = BookFake.CreateOneWithRequiredFields();
+            var book = BookFake.CreateOneValid();
             var logger = new Mock<ILogger<BookController>>();
 
             var service = new Mock<IBookService>();
@@ -151,7 +151,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 
             // Assert
             service.Verify(s => s.Update(It.IsAny<Book>()), Times.Exactly(1));
-            result.StatusCode.Should().Equals(204);
+            result.StatusCode.Should().Be(204);
         }
 
         [Fact]
@@ -159,7 +159,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
         public void GivenHttpPutVerb_WhenRequestBodyContainsNewBook_ThenShouldReturnNotFound()
         {
             // Arrange
-            var book = BookFake.CreateOneWithRequiredFields();
+            var book = BookFake.CreateOneValid();
             var logger = new Mock<ILogger<BookController>>();
 
             var service = new Mock<IBookService>();
@@ -172,7 +172,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 
             // Assert
             service.Verify(s => s.Update(It.IsAny<Book>()), Times.Exactly(1));
-            result.StatusCode.Should().Equals(404);
+            result.StatusCode.Should().Be(404);
         }
 
         #endregion
@@ -184,7 +184,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
         public void GivenHttpDeleteVerb_WhenRequestParameterIdentifiesExistingBook_ThenShouldReturnStatusNoContent()
         {
             // Arrange
-            var book = BookFake.CreateOneWithRequiredFields();
+            var book = BookFake.CreateOneValid();
             var logger = new Mock<ILogger<BookController>>();
 
             var service = new Mock<IBookService>();
@@ -197,7 +197,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 
             // Assert
             service.Verify(s => s.Delete(It.IsAny<string>()), Times.Exactly(1));
-            result.StatusCode.Should().Equals(204);
+            result.StatusCode.Should().Be(204);
         }
 
         [Fact]
@@ -205,7 +205,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
         public void GivenHttpDeleteVerb_WhenRequestParameterDoesNotIdentifyExistingBook_ThenShouldReturnNotFound()
         {
             // Arrange
-            var book = BookFake.CreateOneWithRequiredFields();
+            var book = BookFake.CreateOneValid();
             var logger = new Mock<ILogger<BookController>>();
 
             var service = new Mock<IBookService>();
@@ -218,7 +218,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 
             // Assert
             service.Verify(s => s.Delete(It.IsAny<string>()), Times.Exactly(1));
-            result.StatusCode.Should().Equals(404);
+            result.StatusCode.Should().Be(404);
         }
 
         #endregion

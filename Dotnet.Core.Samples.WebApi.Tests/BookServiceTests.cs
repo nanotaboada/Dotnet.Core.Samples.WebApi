@@ -21,6 +21,8 @@ namespace Dotnet.Core.Samples.WebApi.Tests
     /// </summary>
     public class BookServiceTests
     {
+        #region Retrieve
+
         [Fact]
         [Trait("Category", "Retrieve")]
         public void GivenRetrieveByIsbn_WhenIsbnIsFoundInContext_ThenShouldReturnTheBook()
@@ -29,7 +31,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
             using (var context = new BookContext(new DbContextOptionsBuilder<BookContext>()
                 .UseInMemoryDatabase(databaseName: "Books").Options))
             {
-                var book = BookFake.CreateOneWithRequiredFields();
+                var book = BookFake.CreateOneValid();
                 var logger = new Mock<ILogger<BookService>>();
 
                 context.Books.Add(book);
@@ -53,7 +55,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
             using (var context = new BookContext(new DbContextOptionsBuilder<BookContext>()
                 .UseInMemoryDatabase(databaseName: "Books").Options))
             {
-                var book = BookFake.CreateOneWithRequiredFields();
+                var book = BookFake.CreateOneValid();
                 var logger = new Mock<ILogger<BookService>>();
 
                 var service = new BookService(logger.Object, context);
@@ -65,5 +67,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
                 result.Should().BeNull();
             }
         }
+
+        #endregion
     }
 }

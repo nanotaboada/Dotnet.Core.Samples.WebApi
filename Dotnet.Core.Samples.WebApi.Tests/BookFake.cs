@@ -1,13 +1,14 @@
 using System;
 using Bogus;
+using Dotnet.Core.Samples.WebApi.Models;
 
-namespace Dotnet.Core.Samples.WebApi.Models
+namespace Dotnet.Core.Samples.WebApi.Tests
 {
     public static class BookFake
     {
         private static Random random = new Random();
 
-        public static Book CreateOneWithRequiredFields()
+        public static Book CreateOneValid()
         {
             // Required fields are: Isbn, Title, Author, Published, Description and Website.
             return new Faker<Book>()
@@ -20,7 +21,7 @@ namespace Dotnet.Core.Samples.WebApi.Models
                 .Generate();
         }
 
-        public static Book CreateOneWithoutRequiredFields()
+        public static Book CreateOneInvalid()
         {
             return new Faker<Book>()
                 .RuleFor(book => book.Isbn, fake => CreateFakeIsbn())
