@@ -5,7 +5,8 @@ namespace Dotnet.Core.Samples.WebApi.Models
 {
     public class Book
     {
-        [Key][MinLength(13)][MaxLength(17)]
+        [Key]
+        [Isbn(ErrorMessage = "Invalid ISBN format.")]
         public string Isbn { get; set; }
 
         [Required]
@@ -27,6 +28,7 @@ namespace Dotnet.Core.Samples.WebApi.Models
         public string Description { get; set; }
 
         [Required]
+        [Url]
         public string Website { get; set; }
     }
 }
