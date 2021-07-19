@@ -5,11 +5,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Dotnet.Core.Samples.WebApi.Models
 {
+    /// <summary>
+    /// In EF Core we dropped doing validation since it is usually already done
+    /// client-side, server-side, and then in the database too.
+    /// https://github.com/dotnet/efcore/issues/5224
+    /// </summary>
     public class BookContext : DbContext
     {
         public BookContext(DbContextOptions<BookContext> options)
-            : base(options)
-        { }
+            : base(options) { }
 
         public DbSet<Book> Books { get; set; }
 
@@ -28,8 +32,8 @@ namespace Dotnet.Core.Samples.WebApi.Models
         public override int SaveChanges()
         {
             var entities = ChangeTracker.Entries()
-                .Where(_ => _.State == EntityState.Added
-                    || _.State == EntityState.Modified)
+                .Where(_ => _.State is EntityState.Added
+                    || _.State is EntityState.Modified)
                 .Select(_ => _.Entity);
 
             foreach (var entity in entities)

@@ -28,23 +28,21 @@ namespace Dotnet.Core.Samples.WebApi.Tests
         public void GivenRetrieveByIsbn_WhenIsbnIsFoundInContext_ThenShouldReturnTheBook()
         {
             // Arrange
-            using (var context = new BookContext(new DbContextOptionsBuilder<BookContext>()
-                .UseInMemoryDatabase(databaseName: "Books").Options))
-            {
-                var book = BookFake.CreateOneValid();
-                var logger = new Mock<ILogger<BookService>>();
+            var book = BookFake.CreateOneValid();
+            var logger = new Mock<ILogger<BookService>>().Object;
+            var options = new DbContextOptionsBuilder<BookContext>()
+                .UseInMemoryDatabase(databaseName: "Books").Options;
+            using var context = new BookContext(options);
+            context.Books.Add(book);
+            context.SaveChanges();
 
-                context.Books.Add(book);
-                context.SaveChanges();
+            var service = new BookService(logger, context);
 
-                var service = new BookService(logger.Object, context);
+            // Act
+            var result = service.RetrieveByIsbn(book.Isbn);
 
-                // Act
-                var result = service.RetrieveByIsbn(book.Isbn);
-
-                // Assert
-                result.Should().BeEquivalentTo(book);
-            }
+            // Assert
+            result.Should().BeEquivalentTo(book);
         }
 
         [Fact]
@@ -52,20 +50,19 @@ namespace Dotnet.Core.Samples.WebApi.Tests
         public void GivenRetrieveByIsbn_WhenIsbnNotFoundInContext_ThenShouldReturnNull()
         {
             // Arrange
-            using (var context = new BookContext(new DbContextOptionsBuilder<BookContext>()
-                .UseInMemoryDatabase(databaseName: "Books").Options))
-            {
-                var book = BookFake.CreateOneValid();
-                var logger = new Mock<ILogger<BookService>>();
+            var book = BookFake.CreateOneValid();
+            var logger = new Mock<ILogger<BookService>>().Object;
+            var options = new DbContextOptionsBuilder<BookContext>()
+                .UseInMemoryDatabase(databaseName: "Books").Options;
+            using var context = new BookContext(options);
 
-                var service = new BookService(logger.Object, context);
+            var service = new BookService(logger, context);
 
-                // Act
-                var result = service.RetrieveByIsbn(book.Isbn);
+            // Act
+            var result = service.RetrieveByIsbn(book.Isbn);
 
-                // Assert
-                result.Should().BeNull();
-            }
+            // Assert
+            result.Should().BeNull();
         }
 
         #endregion

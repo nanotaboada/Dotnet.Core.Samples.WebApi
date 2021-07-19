@@ -40,7 +40,7 @@ namespace Dotnet.Core.Samples.WebApi
             {
                 application.UseDeveloperExceptionPage();
                 application.UseSwagger();
-                application.UseSwaggerUI(options => 
+                application.UseSwaggerUI(options =>
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "Dotnet.Core.Samples.WebApi v1")
                 );
             }
