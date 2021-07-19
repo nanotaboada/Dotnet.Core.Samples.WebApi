@@ -1,0 +1,33 @@
+﻿root = true
+
+# https://docs.microsoft.com/en-us/visualstudio/mac/editorconfig?view=vsmac-2019
+# https://developercommunity.visualstudio.com/t/visual-studio-for-mac-doesnt-see-editorconfig/623923
+
+[*]
+
+indent_size = 4
+tab_width = 4
+indent_style = space
+
+[*.cs]
+
+dotnet_analyzer_diagnostic.category-Style.severity = suggestion
+
+# 'var' preferences (IDE0007 and IDE0008)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0007-ide0008
+csharp_style_var_for_built_in_types = true
+csharp_style_var_when_type_is_apparent = true
+csharp_style_var_elsewhere = true
+
+# Use expression body for methods (IDE0022)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0022
+csharp_style_expression_bodied_methods = true
+
+# Use conditional expression for return (IDE0046)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0046
+dotnet_style_prefer_conditional_expression_over_return = false
+
+# Remove unnecessary expression value
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0058
+csharp_style_unused_value_expression_statement_preference = discard_variable
+

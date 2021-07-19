@@ -6,7 +6,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 {
     public static class BookFake
     {
-        private static Random random = new Random();
+        private static readonly Random random = new();
 
         public static Book CreateOneValid()
         {

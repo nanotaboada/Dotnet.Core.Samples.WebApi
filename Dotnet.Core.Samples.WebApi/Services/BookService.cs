@@ -1,5 +1,4 @@
 ﻿using Dotnet.Core.Samples.WebApi.Models;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Dotnet.Core.Samples.WebApi.Services
@@ -18,16 +17,10 @@ namespace Dotnet.Core.Samples.WebApi.Services
         // Create
         public bool Create(Book book)
         {
-            int result;
-
             _bookContext.Add(book);
+            var created = _bookContext.SaveChanges() == 1;
 
-            // In EF Core we dropped doing validation since it is usually already
-            // done client-side, server-side, and then in the database too.
-            // https://github.com/dotnet/efcore/issues/5224
-            result = _bookContext.SaveChanges();
-
-            return result == 1;
+            return created;
         }
 
         // Retrieve
@@ -39,30 +32,30 @@ namespace Dotnet.Core.Samples.WebApi.Services
         // Update
         public bool Update(Book book)
         {
-            int result = 0;
+            var updated = false;
 
-            if (_bookContext.Books.Find(book.Isbn) != null)
+            if (_bookContext.Books.Find(book.Isbn) is not null)
             {
                 _bookContext.Update(book);
-                result = _bookContext.SaveChanges();
+                updated = _bookContext.SaveChanges() == 1;
             }
 
-            return result == 1;
+            return updated;
         }
 
         // Delete
         public bool Delete(string isbn)
         {
-            int result = 0;
+            var deleted = false;
             var existing = _bookContext.Books.Find(isbn);
 
-            if (existing != null)
+            if (existing is not null)
             {
                 _bookContext.Books.Remove(existing);
-                result = _bookContext.SaveChanges();
+                deleted = _bookContext.SaveChanges() == 1;
             }
 
-            return result == 1;
+            return deleted;
         }
     }
 }
