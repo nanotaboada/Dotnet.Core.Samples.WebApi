@@ -22,6 +22,10 @@
     <PackageReference Include="Bogus" Version="33.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.8" />
+    <PackageReference Include="coverlet.msbuild" Version="3.1.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +37,7 @@
     <None Remove="Bogus" />
     <None Remove="Microsoft.EntityFrameworkCore.InMemory" />
     <None Remove="Microsoft.EntityFrameworkCore" />
+    <None Remove="coverlet.msbuild" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" />
