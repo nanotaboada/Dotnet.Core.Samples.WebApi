@@ -16,6 +16,7 @@ BenchmarkDotNet.Artifacts/
 src/SignalR/clients/**/dist/
 modules/
 .ionide/
+TestResults/
 
 # File extensions
 *.aps
@@ -45,3 +46,4 @@ StyleCop.Cache
 UpgradeLog.htm
 .idea
 *.svclog
+coverage*.xml
