@@ -14,7 +14,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
         #region HTTP GET
         [Fact]
         [Trait("Category", "HTTP GET")]
-        public void GivenHttpGetVerb_WhenRequestParameterDoesNotIdentifyAnExistingBook_ThenShouldReturnStatusNotFound()
+        public void GivenHttpGetVerb_WhenRequestParameterDoesNotIdentifyExistingBook_ThenShouldReturnStatusCode404NotFound()
         {
             // Arrange
             string isbn = null;
@@ -35,7 +35,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 
         [Fact]
         [Trait("Category", "HTTP GET")]
-        public void GivenHttpGetVerb_WhenRequestParameterIdentifiesExistingBook_ThenShouldReturnStatusOkAndTheBook()
+        public void GivenHttpGetVerb_WhenRequestParameterIdentifiesExistingBook_ThenShouldReturnStatusCode200OkAndTheBook()
         {
             // Arrange
             var book = BookFake.CreateOneValid();
@@ -60,7 +60,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 
         [Fact]
         [Trait("Category", "HTTP POST")]
-        public void GivenHttpPostVerb_WhenRequestBodyContainsExistingBook_ThenShouldReturnStatusConflict()
+        public void GivenHttpPostVerb_WhenRequestBodyContainsExistingBook_ThenShouldReturnStatusCode409Conflict()
         {
             // Arrange
             var book = BookFake.CreateOneValid();
@@ -82,7 +82,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 
         [Fact]
         [Trait("Category", "HTTP POST")]
-        public void GivenHttpPostVerb_WhenRequestBodyContainsNewBook_ThenShouldReturnStatusCreatedAndLocationHeader()
+        public void GivenHttpPostVerb_WhenRequestBodyContainsNewBook_ThenShouldReturnStatusCode201CreatedAndLocationHeader()
         {
             // Arrange
             var book = BookFake.CreateOneValid();
@@ -101,6 +101,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
             // Assert
             service.Verify(s => s.RetrieveByIsbn(It.IsAny<string>()), Times.Exactly(1));
             service.Verify(s => s.Create(It.IsAny<Book>()), Times.Exactly(1));
+
             result.StatusCode.Should().Be(201);
             result.Location.Should().BeEquivalentTo(location);
             result.Value.Should().BeEquivalentTo(book);
@@ -108,7 +109,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 
         [Fact]
         [Trait("Category", "HTTP POST")]
-        public void GivenHttpPostVerb_WhenRequestBodyContainsInvalidBook_ThenShouldReturnStatusBadRequest()
+        public void GivenHttpPostVerb_WhenRequestBodyContainsInvalidBook_ThenShouldReturnStatusCode400BadRequest()
         {
             // Arrange
             var book = BookFake.CreateOneInvalid();
@@ -126,6 +127,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
             // Assert
             service.Verify(s => s.RetrieveByIsbn(It.IsAny<string>()), Times.Exactly(1));
             service.Verify(s => s.Create(It.IsAny<Book>()), Times.Exactly(1));
+
             result.StatusCode.Should().Be(400);
         }
 
@@ -135,7 +137,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 
         [Fact]
         [Trait("Category", "HTTP PUT")]
-        public void GivenHttpPutVerb_WhenRequestBodyContainsExistingBook_ThenShouldReturnStatusNoContent()
+        public void GivenHttpPutVerb_WhenRequestBodyContainsExistingBook_ThenShouldReturnStatusCode204NoContent()
         {
             // Arrange
             var book = BookFake.CreateOneValid();
@@ -151,12 +153,13 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 
             // Assert
             service.Verify(s => s.Update(It.IsAny<Book>()), Times.Exactly(1));
+
             result.StatusCode.Should().Be(204);
         }
 
         [Fact]
         [Trait("Category", "HTTP PUT")]
-        public void GivenHttpPutVerb_WhenRequestBodyContainsNewBook_ThenShouldReturnNotFound()
+        public void GivenHttpPutVerb_WhenRequestBodyContainsNewBook_ThenShouldReturnStatusCode404NotFound()
         {
             // Arrange
             var book = BookFake.CreateOneValid();
@@ -172,6 +175,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 
             // Assert
             service.Verify(s => s.Update(It.IsAny<Book>()), Times.Exactly(1));
+
             result.StatusCode.Should().Be(404);
         }
 
@@ -181,7 +185,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 
         [Fact]
         [Trait("Category", "HTTP DELETE")]
-        public void GivenHttpDeleteVerb_WhenRequestParameterIdentifiesExistingBook_ThenShouldReturnStatusNoContent()
+        public void GivenHttpDeleteVerb_WhenRequestParameterIdentifiesExistingBook_ThenShouldReturnStatusCode204NoContent()
         {
             // Arrange
             var book = BookFake.CreateOneValid();
@@ -197,12 +201,13 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 
             // Assert
             service.Verify(s => s.Delete(It.IsAny<string>()), Times.Exactly(1));
+
             result.StatusCode.Should().Be(204);
         }
 
         [Fact]
         [Trait("Category", "HTTP DELETE")]
-        public void GivenHttpDeleteVerb_WhenRequestParameterDoesNotIdentifyExistingBook_ThenShouldReturnNotFound()
+        public void GivenHttpDeleteVerb_WhenRequestParameterDoesNotIdentifyExistingBook_ThenShouldReturnStatusCode404NotFound()
         {
             // Arrange
             var book = BookFake.CreateOneValid();
@@ -218,6 +223,7 @@ namespace Dotnet.Core.Samples.WebApi.Tests
 
             // Assert
             service.Verify(s => s.Delete(It.IsAny<string>()), Times.Exactly(1));
+
             result.StatusCode.Should().Be(404);
         }
 

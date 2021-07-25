@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Dotnet.Core.Samples.WebApi.Models;
 using Dotnet.Core.Samples.WebApi.Services;
 using Microsoft.AspNetCore.Builder;
@@ -10,6 +11,7 @@ using Microsoft.OpenApi.Models;
 
 namespace Dotnet.Core.Samples.WebApi
 {
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         public Startup(IConfiguration configuration)

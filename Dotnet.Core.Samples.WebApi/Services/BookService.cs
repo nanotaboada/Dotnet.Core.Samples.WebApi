@@ -1,4 +1,5 @@
-﻿using Dotnet.Core.Samples.WebApi.Models;
+﻿using System;
+using Dotnet.Core.Samples.WebApi.Models;
 using Microsoft.Extensions.Logging;
 
 namespace Dotnet.Core.Samples.WebApi.Services
@@ -17,8 +18,17 @@ namespace Dotnet.Core.Samples.WebApi.Services
         // Create
         public bool Create(Book book)
         {
-            _bookContext.Add(book);
-            var created = _bookContext.SaveChanges() == 1;
+            var created = false;
+
+            try
+            {
+                _bookContext.Add(book);
+                created = _bookContext.SaveChanges() == 1;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception.Message);
+            }
 
             return created;
         }
@@ -36,8 +46,15 @@ namespace Dotnet.Core.Samples.WebApi.Services
 
             if (_bookContext.Books.Find(book.Isbn) is not null)
             {
-                _bookContext.Update(book);
-                updated = _bookContext.SaveChanges() == 1;
+                try
+                {
+                    _bookContext.Update(book);
+                    updated = _bookContext.SaveChanges() == 1;
+                }
+                catch (Exception exception)
+                {
+                    _logger.LogError(exception.Message);
+                }
             }
 
             return updated;
@@ -51,8 +68,15 @@ namespace Dotnet.Core.Samples.WebApi.Services
 
             if (existing is not null)
             {
-                _bookContext.Books.Remove(existing);
-                deleted = _bookContext.SaveChanges() == 1;
+                try
+                {
+                    _bookContext.Books.Remove(existing);
+                    deleted = _bookContext.SaveChanges() == 1;
+                }
+                catch (Exception exception)
+                {
+                    _logger.LogError(exception.Message);
+                }
             }
 
             return deleted;
