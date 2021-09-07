@@ -2,10 +2,12 @@
 
 ## Status
 
-[![CodeFactor](https://www.codefactor.io/repository/github/nanotaboada/dotnet.core.samples.webapi/badge/master)](https://www.codefactor.io/repository/github/nanotaboada/dotnet.core.samples.webapi/overview/master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bc69171666a84345b219bbb72a2e91a9)](https://app.codacy.com/gh/nanotaboada/Dotnet.Core.Samples.WebApi?utm_source=github.com&utm_medium=referral&utm_content=nanotaboada/Dotnet.Core.Samples.WebApi&utm_campaign=Badge_Grade_Settings)
 [![.NET](https://github.com/nanotaboada/Dotnet.Core.Samples.WebApi/actions/workflows/dotnet.yml/badge.svg)](https://github.com/nanotaboada/Dotnet.Core.Samples.WebApi/actions/workflows/dotnet.yml)
 [![Build Status](https://dev.azure.com/nanotaboada/Dotnet.Core.Samples.WebApi/_apis/build/status/nanotaboada.Dotnet.Core.Samples.WebApi?branchName=master)](https://dev.azure.com/nanotaboada/Dotnet.Core.Samples.WebApi/_build/latest?definitionId=11&branchName=master)
+[![CodeFactor](https://www.codefactor.io/repository/github/nanotaboada/dotnet.core.samples.webapi/badge/master)](https://www.codefactor.io/repository/github/nanotaboada/dotnet.core.samples.webapi/overview/master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f70796483411bd705341/maintainability)](https://codeclimate.com/github/nanotaboada/Dotnet.Core.Samples.WebApi/maintainability)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bc69171666a84345b219bbb72a2e91a9)](https://app.codacy.com/gh/nanotaboada/Dotnet.Core.Samples.WebApi?utm_source=github.com&utm_medium=referral&utm_content=nanotaboada/Dotnet.Core.Samples.WebApi&utm_campaign=Badge_Grade_Settings)
+[![codecov](https://codecov.io/gh/nanotaboada/Dotnet.Core.Samples.WebApi/branch/master/graph/badge.svg?token=XM5UKMGOVK)](https://codecov.io/gh/nanotaboada/Dotnet.Core.Samples.WebApi)
 
 ## Manifesto
 
