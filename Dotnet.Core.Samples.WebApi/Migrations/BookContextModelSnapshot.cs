@@ -2,11 +2,12 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Dotnet.Core.Samples.WebApi.Models;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Dotnet.Core.Samples.Webapi.Migrations
 {
+    [ExcludeFromCodeCoverage]
     [DbContext(typeof(BookContext))]
     partial class BookContextModelSnapshot : ModelSnapshot
     {

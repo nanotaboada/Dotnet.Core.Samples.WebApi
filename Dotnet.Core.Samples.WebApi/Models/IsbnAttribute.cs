@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
 namespace Dotnet.Core.Samples.WebApi.Models
 {
+    [ExcludeFromCodeCoverage]
     /// <summary>
     /// Provides ISBN validation.
     /// </summary>

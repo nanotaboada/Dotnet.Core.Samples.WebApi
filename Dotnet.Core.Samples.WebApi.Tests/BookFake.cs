@@ -1,9 +1,11 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Bogus;
 using Dotnet.Core.Samples.WebApi.Models;
 
 namespace Dotnet.Core.Samples.WebApi.Tests
 {
+    [ExcludeFromCodeCoverage]
     public static class BookFake
     {
         private static readonly Random random = new();

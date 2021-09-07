@@ -6,6 +6,7 @@ namespace Dotnet.Core.Samples.WebApi.Models
     public class Book
     {
         [Key]
+        [Required]
         [Isbn(ErrorMessage = "Invalid ISBN format.")]
         public string Isbn { get; set; }
 
