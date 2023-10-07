@@ -1,0 +1,2 @@
+ignore:
+  - "Dotnet.Core.Samples.WebApi/Models"
