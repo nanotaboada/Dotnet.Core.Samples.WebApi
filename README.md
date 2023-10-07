@@ -15,7 +15,7 @@
 
 ## About
 
-Proof of Concept for a REST API made with [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-5.0) targeting [.NET 5.0](https://docs.microsoft.com/en-us/dotnet/core/dotnet-five)
+Proof of Concept for a REST API made with [ASP.NET Core](https://devblogs.microsoft.com/dotnet/announcing-asp-net-core-in-dotnet-7/) targeting [.NET 7.0](https://devblogs.microsoft.com/dotnet/announcing-dotnet-7/)
 
 ## Credits
 
